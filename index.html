@@ -1,27 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SVG Background Example</title>
+    <title>Khada - Bug Hunting Tool</title>
 
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="background-container d-flex justify-content-center align-items-center text-white">
-      <h1>SVG Background Example</h1>
+    <div class="background-container">
+      <div class="container py-4 text-white">
+        <h1 class="text-center mb-4">
+          <i class="fas fa-search me-2"></i>Khada - Bug Hunting Tool
+        </h1>
+
+        <!-- Income and Expenses Section -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card text-success mb-3">
+              <div class="card-body d-flex align-items-center">
+                <i class="fas fa-arrow-up fa-2x me-3"></i>
+                <div>
+                  <h5 class="card-title">Total Income</h5>
+                  <p id="total-income" class="card-text h4">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card text-danger mb-3">
+              <div class="card-body d-flex align-items-center">
+                <i class="fas fa-arrow-down fa-2x me-3"></i>
+                <div>
+                  <h5 class="card-title">Total Expenses</h5>
+                  <p id="total-expenses" class="card-text h4">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Transaction Section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-plus-circle text-primary me-2"></i>Add Transaction
+            </h5>
+            <form id="transaction-form">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="type" class="form-label">Type</label>
+                  <select id="type" class="form-select">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="category" class="form-label">Category</label>
+                  <input
+                    type="text"
+                    id="category"
+                    class="form-control"
+                    placeholder="e.g., Bounty, Report, Tool"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input
+                  type="text"
+                  id="description"
+                  class="form-control"
+                  placeholder="e.g., Bounty from X program"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input
+                  type="number"
+                  id="amount"
+                  class="form-control"
+                  placeholder="Enter amount"
+                  min="0"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-plus me-2"></i>Add Transaction
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Transaction History Section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-history me-2"></i>Transaction History
+            </h5>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="transaction-table-body">
+                  <tr>
+                    <td colspan="5" class="text-center">No transactions added yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Export Options Section -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-file-export me-2"></i>Export Options
+            </h5>
+            <div class="d-flex gap-2">
+              <button id="export-text" class="btn btn-secondary">
+                <i class="fas fa-file-alt me-2"></i>Export as Text
+              </button>
+              <button id="export-json" class="btn btn-primary">
+                <i class="fas fa-file-code me-2"></i>Export as JSON
+              </button>
+              <button id="export-csv" class="btn btn-success">
+                <i class="fas fa-file-csv me-2"></i>Export as CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Summary Section -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-chart-pie me-2"></i>Financial Summary
+            </h5>
+            <div class="row text-center">
+              <div class="col-md-4">
+                <i class="fas fa-arrow-up text-success fa-2x"></i>
+                <h6>Total Income</h6>
+                <p id="summary-income" class="h5">0</p>
+              </div>
+              <div class="col-md-4">
+                <i class="fas fa-arrow-down text-danger fa-2x"></i>
+                <h6>Total Expenses</h6>
+                <p id="summary-expenses" class="h5">0</p>
+              </div>
+              <div class="col-md-4">
+                <i class="fas fa-balance-scale text-primary fa-2x"></i>
+                <h6>Net Balance</h6>
+                <p id="summary-balance" class="h5">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
   </body>
 </html>
-
- 
