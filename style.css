@@ -1,0 +1,16 @@
+/* Custom styles */
+.card-title {
+  font-weight: 600;
+}
+
+.table {
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+}
+
+.card {
+  border-radius: 10px;
+}
