@@ -1,6 +1,6 @@
 # Suco-bug
 
-# 🌟 Khada - Bug Hunting Tool 🐛🔍
+# 🌟  - Bugguting  Hunting Tool 🐛🔍
 
 Welcome to **Khade217**, your ultimate **Bugguting Hunting Tool**! 🚀 This project is designed to help you track, manage, and analyze bugs with ease. Whether you're a developer, tester, or enthusiast, Khada has something for everyone! 💻✨
 
